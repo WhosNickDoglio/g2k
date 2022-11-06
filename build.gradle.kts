@@ -3,12 +3,15 @@ import org.jetbrains.changelog.markdownToHTML
 fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
-    // Java support
-    id("java")
     // Kotlin support
-    id("org.jetbrains.kotlin.jvm") version "1.7.10"
+    alias(libs.plugins.kotlin.jvm)
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.8.0"
+    alias(libs.plugins.intellij)
+    // Linting Code with Detekt
+    alias(libs.plugins.detekt)
+    // alias(libs.plugins.doctor)
+    alias(libs.plugins.benManes.versions)
+    alias(libs.plugins.dependencyAnalysis)
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
@@ -18,10 +21,6 @@ plugins {
 group = properties("pluginGroup")
 version = properties("pluginVersion")
 
-// Configure project's dependencies
-repositories {
-    mavenCentral()
-}
 
 // Set the JVM language level used to compile sources and generate files - Java 11 is required since 2020.3
 kotlin {
@@ -54,6 +53,13 @@ qodana {
     showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
 }
 
+dependencies {
+    detektPlugins(libs.detekt.formatting)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+}
+
 tasks {
     wrapper {
         gradleVersion = properties("gradleVersion")
@@ -64,14 +70,14 @@ tasks {
         sinceBuild.set(properties("pluginSinceBuild"))
         untilBuild.set(properties("pluginUntilBuild"))
 
-        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+        // Extract the <!-- Plugin description --> section from template-README.md and provide for the plugin's manifest
         pluginDescription.set(
-            projectDir.resolve("README.md").readText().lines().run {
+            projectDir.resolve("template-README.md").readText().lines().run {
                 val start = "<!-- Plugin description -->"
                 val end = "<!-- Plugin description end -->"
 
                 if (!containsAll(listOf(start, end))) {
-                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                    throw GradleException("Plugin description section not found in template-README.md:\n$start ... $end")
                 }
                 subList(indexOf(start) + 1, indexOf(end))
             }.joinToString("\n").run { markdownToHTML(this) }

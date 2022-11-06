@@ -1,0 +1,18 @@
+[versions]
+kotlin = "1.7.20"
+detekt = "1.21.0"
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+benManes-versions = { id = "com.github.ben-manes.versions", version = "0.43.0" }
+doctor = { id = "com.osacky.doctor", version = "0.8.1" }
+dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "1.13.1" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+intellij = { id = "org.jetbrains.intellij", version = "1.9.0" }
+
+[libraries]
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
+junit = { module = "junit:junit", version = "4.13.2" }
+truth = { module = "com.google.truth:truth", version = "1.1.3" }
+
