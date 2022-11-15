@@ -6,7 +6,7 @@ detekt = "1.21.0"
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 benManes-versions = { id = "com.github.ben-manes.versions", version = "0.44.0" }
 doctor = { id = "com.osacky.doctor", version = "0.8.1" }
-dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "1.14.0" }
+dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "1.14.1" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 intellij = { id = "org.jetbrains.intellij", version = "1.9.0" }
 
