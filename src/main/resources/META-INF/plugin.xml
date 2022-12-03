@@ -31,21 +31,16 @@
     <depends>com.intellij.modules.platform</depends>
 
     <actions>
-        <action id="g2kAction" text="Convert Gradle Groovy to Kotlin"
+        <action id="g2kAction" text="Convert Gradle Groovy DSL to Kotlin DSL"
                 class="dev.whosnickdoglio.g2k.ConvertGroovyToKotlinAction">
 
-            <add-to-group group-id="ToolsMenu"/>
+            <keyboard-shortcut
+                keymap="$default"
+                first-keystroke="control alt G"
+                second-keystroke="C"/>
+
+            <add-to-group group-id="EditorPopupMenu"/>
         </action>
 
     </actions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="dev.whosnickdoglio.g2k.services.MyApplicationService"/>
-        <projectService serviceImplementation="dev.whosnickdoglio.g2k.services.MyProjectService"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="dev.whosnickdoglio.g2k.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
