@@ -24,19 +24,28 @@
 
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.whosnickdoglio.g2k</id>
+    <id>dev.whosnickdoglio.g2k</id>
     <name>g2k</name>
     <vendor>whosnickdoglio</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
+    <actions>
+        <action id="g2kAction" text="Convert Gradle Groovy to Kotlin"
+                class="dev.whosnickdoglio.g2k.ConvertGroovyToKotlinAction">
+
+            <add-to-group group-id="ToolsMenu"/>
+        </action>
+
+    </actions>
+
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.whosnickdoglio.g2k.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.whosnickdoglio.g2k.services.MyProjectService"/>
+        <applicationService serviceImplementation="dev.whosnickdoglio.g2k.services.MyApplicationService"/>
+        <projectService serviceImplementation="dev.whosnickdoglio.g2k.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.whosnickdoglio.g2k.listeners.MyProjectManagerListener"
+        <listener class="dev.whosnickdoglio.g2k.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>

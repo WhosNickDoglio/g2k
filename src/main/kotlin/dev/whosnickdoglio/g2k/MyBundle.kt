@@ -22,34 +22,24 @@
  * SOFTWARE.
  */
 
-package com.github.whosnickdoglio.g2k
+package dev.whosnickdoglio.g2k
 
-import com.intellij.ide.highlighter.XmlFileType
-import com.intellij.psi.xml.XmlFile
-import com.intellij.testFramework.TestDataPath
-import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.intellij.util.PsiErrorElementUtil
+import com.intellij.DynamicBundle
+import org.jetbrains.annotations.NonNls
+import org.jetbrains.annotations.PropertyKey
 
-@TestDataPath("\$CONTENT_ROOT/src/test/testData")
-class MyPluginTest : BasePlatformTestCase() {
+@NonNls
+private const val BUNDLE = "messages.MyBundle"
 
-    fun testXMLFile() {
-        val psiFile = myFixture.configureByText(XmlFileType.INSTANCE, "<foo>bar</foo>")
-        val xmlFile = assertInstanceOf(psiFile, XmlFile::class.java)
+object MyBundle : DynamicBundle(BUNDLE) {
 
-        assertFalse(PsiErrorElementUtil.hasErrors(project, xmlFile.virtualFile))
+    @Suppress("SpreadOperator")
+    @JvmStatic
+    fun message(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) =
+        getMessage(key, *params)
 
-        assertNotNull(xmlFile.rootTag)
-
-        xmlFile.rootTag?.let {
-            assertEquals("foo", it.name)
-            assertEquals("bar", it.value.text)
-        }
-    }
-
-    override fun getTestDataPath() = "src/test/testData/rename"
-
-    fun testRename() {
-        myFixture.testRename("foo.xml", "foo_after.xml", "a2")
-    }
+    @Suppress("SpreadOperator", "unused")
+    @JvmStatic
+    fun messagePointer(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) =
+        getLazyMessage(key, *params)
 }

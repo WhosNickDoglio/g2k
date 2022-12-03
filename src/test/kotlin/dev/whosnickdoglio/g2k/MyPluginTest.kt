@@ -22,17 +22,34 @@
  * SOFTWARE.
  */
 
-package com.github.whosnickdoglio.g2k.services
+package dev.whosnickdoglio.g2k
 
-import com.intellij.openapi.project.Project
-import com.github.whosnickdoglio.g2k.MyBundle
+import com.intellij.ide.highlighter.XmlFileType
+import com.intellij.psi.xml.XmlFile
+import com.intellij.testFramework.TestDataPath
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
+import com.intellij.util.PsiErrorElementUtil
 
-class MyProjectService(project: Project) {
+@TestDataPath("\$CONTENT_ROOT/src/test/testData")
+class MyPluginTest : BasePlatformTestCase() {
 
-    init {
-        println(MyBundle.message("projectService", project.name))
+    fun testXMLFile() {
+        val psiFile = myFixture.configureByText(XmlFileType.INSTANCE, "<foo>bar</foo>")
+        val xmlFile = assertInstanceOf(psiFile, XmlFile::class.java)
 
-        System.getenv("CI")
-            ?: TODO("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
+        assertFalse(PsiErrorElementUtil.hasErrors(project, xmlFile.virtualFile))
+
+        assertNotNull(xmlFile.rootTag)
+
+        xmlFile.rootTag?.let {
+            assertEquals("foo", it.name)
+            assertEquals("bar", it.value.text)
+        }
+    }
+
+    override fun getTestDataPath() = "src/test/testData/rename"
+
+    fun testRename() {
+        myFixture.testRename("foo.xml", "foo_after.xml", "a2")
     }
 }

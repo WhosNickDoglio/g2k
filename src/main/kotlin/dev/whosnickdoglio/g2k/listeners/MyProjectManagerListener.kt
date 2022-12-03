@@ -22,14 +22,17 @@
  * SOFTWARE.
  */
 
-package com.github.whosnickdoglio.g2k.services
+package dev.whosnickdoglio.g2k.listeners
 
-import com.github.whosnickdoglio.g2k.MyBundle
+import com.intellij.openapi.components.service
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.project.ProjectManagerListener
+import dev.whosnickdoglio.g2k.services.MyProjectService
 
-class MyApplicationService {
+internal class MyProjectManagerListener : ProjectManagerListener {
 
-    init {
-        println(MyBundle.message("applicationService"))
+    override fun projectOpened(project: Project) {
+        project.service<MyProjectService>()
 
         System.getenv("CI")
             ?: TODO("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")

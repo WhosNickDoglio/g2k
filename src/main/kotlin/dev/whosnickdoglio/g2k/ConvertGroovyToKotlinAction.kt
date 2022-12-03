@@ -22,19 +22,22 @@
  * SOFTWARE.
  */
 
-package com.github.whosnickdoglio.g2k.listeners
+package dev.whosnickdoglio.g2k
 
-import com.intellij.openapi.components.service
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.ProjectManagerListener
-import com.github.whosnickdoglio.g2k.services.MyProjectService
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
 
-internal class MyProjectManagerListener : ProjectManagerListener {
+/**
+ *
+ */
+internal class ConvertGroovyToKotlinAction : AnAction() {
 
-    override fun projectOpened(project: Project) {
-        project.service<MyProjectService>()
 
-        System.getenv("CI")
-            ?: TODO("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
+    override fun actionPerformed(event: AnActionEvent) {
+        TODO("Not yet implemented")
+    }
+
+    override fun update(event: AnActionEvent) {
+        super.update(event)
     }
 }

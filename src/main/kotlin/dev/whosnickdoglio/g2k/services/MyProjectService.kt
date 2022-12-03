@@ -22,24 +22,17 @@
  * SOFTWARE.
  */
 
-package com.github.whosnickdoglio.g2k
+package dev.whosnickdoglio.g2k.services
 
-import com.intellij.DynamicBundle
-import org.jetbrains.annotations.NonNls
-import org.jetbrains.annotations.PropertyKey
+import com.intellij.openapi.project.Project
+import dev.whosnickdoglio.g2k.MyBundle
 
-@NonNls
-private const val BUNDLE = "messages.MyBundle"
+class MyProjectService(project: Project) {
 
-object MyBundle : DynamicBundle(BUNDLE) {
+    init {
+        println(MyBundle.message("projectService", project.name))
 
-    @Suppress("SpreadOperator")
-    @JvmStatic
-    fun message(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) =
-        getMessage(key, *params)
-
-    @Suppress("SpreadOperator", "unused")
-    @JvmStatic
-    fun messagePointer(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) =
-        getLazyMessage(key, *params)
+        System.getenv("CI")
+            ?: TODO("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
+    }
 }

@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-package com.github.whosnickdoglio.g2k
+package dev.whosnickdoglio.g2k.services
 
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
+import dev.whosnickdoglio.g2k.MyBundle
 
-/**
- *
- */
-internal class ConvertGroovyToKotlinAction : AnAction() {
+class MyApplicationService {
 
-    override fun actionPerformed(event: AnActionEvent) {
-        TODO("Not yet implemented")
+    init {
+        println(MyBundle.message("applicationService"))
+
+        System.getenv("CI")
+            ?: TODO("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
     }
 }
