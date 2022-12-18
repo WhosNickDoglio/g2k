@@ -24,13 +24,14 @@
 
 package dev.whosnickdoglio.g2k
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 
-/**
- *
- */
+/**  */
 internal class ConvertGroovyToKotlinAction : AnAction() {
+
+    override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
 
     override fun actionPerformed(event: AnActionEvent) {
         TODO("Not yet implemented")
