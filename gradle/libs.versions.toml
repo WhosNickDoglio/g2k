@@ -15,6 +15,8 @@ qodana = { id = "org.jetbrains.qodana", version = "0.1.13" }
 
 
 [libraries]
+kotln-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin"}
+
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 junit = { module = "junit:junit", version = "4.13.2" }

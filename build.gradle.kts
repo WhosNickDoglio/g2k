@@ -81,6 +81,7 @@ qodana {
 }
 
 dependencies {
+    implementation(platform(libs.kotln.bom))
     detektPlugins(libs.detekt.formatting)
     testImplementation(libs.junit)
     testImplementation(libs.truth)
