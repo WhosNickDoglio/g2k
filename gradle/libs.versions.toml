@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.8.10"
-detekt = "1.22.0"
+detekt = "1.23.0"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
