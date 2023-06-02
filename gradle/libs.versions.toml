@@ -9,7 +9,7 @@ doctor = { id = "com.osacky.doctor", version = "0.8.1" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version = "1.19.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 intellij = { id = "org.jetbrains.intellij", version = "1.13.0" }
-changelog = { id = "org.jetbrains.changelog", version = "2.0.0" }
+changelog = { id = "org.jetbrains.changelog", version = "2.1.0" }
 # TODO do I need this?
 qodana = { id = "org.jetbrains.qodana", version = "0.1.13" }
 
